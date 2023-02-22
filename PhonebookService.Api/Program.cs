@@ -37,7 +37,7 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "PhonebookService API v1"));
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
