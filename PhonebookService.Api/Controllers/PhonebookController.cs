@@ -69,6 +69,11 @@ public class PhonebookController : Controller
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> UpdateItemAsync(int id, [FromBody]PhonebookRecord item)
 	{
+		PhonebookRecord? entry = await _book.GetItemByIdAsync(id);
+
+		if (entry is null)
+			return NotFound();
+
 		ValidationResult result = await _validator.ValidateAsync(item);
 
 		if (!result.IsValid)
@@ -80,7 +85,7 @@ public class PhonebookController : Controller
 		}
 
 		item.Id = id;
-		PhonebookRecord entry = await _book.UpdateItemAsync(item);
+		entry = await _book.UpdateItemAsync(item);
 
 		return Json(entry);
 	}
